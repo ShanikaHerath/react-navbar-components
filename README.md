@@ -1,73 +1,86 @@
-# React + TypeScript + Vite
+# react-navbar-components
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An all-in-one collection of modern, responsive, and highly customizable React navigation bars. Whether you need minimal, glassmorphism, dark-mode ready, or complex mega menus, find the perfect navbar for any project here.
 
-Currently, two official plugins are available:
+## 🚀 Features Included
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This repository comes pre-packaged with **three premium navigation bar designs** built using React, TypeScript, Tailwind CSS, and Framer Motion:
 
-## React Compiler
+1. **🕊️ Minimalist & Clean**
+   - Typography-focused design with elegant whitespace.
+   - Smooth active link indicator (sliding underline) powered by Framer Motion.
+   - Clean, lightweight dropdown submenus.
+   - Fully responsive slide-out mobile drawer.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. **🧪 Glassmorphism (Floating Capsule)**
+   - Beautiful floating layout with `backdrop-filter: blur()`.
+   - Semi-transparent borders (`border-white/20`) and custom gradients.
+   - Dynamic sliding background hover pill tracking active/hovered items.
+   - Fully interactive dropdown submenus.
 
-## Expanding the ESLint configuration
+3. **🌌 Dark Mode Premium**
+   - Deep zinc/black premium backdrop.
+   - Bottom linear-gradient glowing accent line.
+   - Pulsing neon indicator dot tracking hover items.
+   - Double-gradient bordered call-to-action buttons.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
+- **Framework**: React 18+ (Vite)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v3
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Get Started
+
+### 1. Installation
+Clone the repository:
+```bash
+git clone https://github.com/ShanikaHerath/react-navbar-components.git
+cd react-navbar-components
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Install the dependencies:
+```bash
+npm install
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 2. Run the Interactive Showroom
+We've included a stunning interactive showroom where you can preview the different navbars, customize their props in real-time, test mobile responsiveness, and inspect code copy-paste snippets.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Start the development server:
+```bash
+npm run dev
+```
+
+### 3. Usage & Integration
+Copy your desired component from `src/components/` and the typings contract from `src/types/navbar.ts` into your project. Configure it by passing the corresponding props:
+
+```tsx
+import { MinimalistNavbar } from './components/MinimalistNavbar';
+import type { NavLink, NavCTA } from './types/navbar';
+
+const links: NavLink[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Products', href: '/products', badge: 'New' }
+];
+
+const cta: NavCTA = {
+  label: 'Sign Up',
+  href: '/signup'
+};
+
+export default function App() {
+  return (
+    <MinimalistNavbar 
+      logo="BRAND" 
+      links={links} 
+      cta={cta} 
+    />
+  );
+}
 ```
