@@ -690,9 +690,12 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
               )}
 
               {/* Viewport Frame Box Wrapper */}
-              <div className={`w-full mx-auto transition-all duration-500 z-10 ${
-                viewportMode === 'mobile' ? 'max-w-[360px] border-8 border-slate-800 rounded-[32px] overflow-y-auto bg-slate-900 shadow-2xl h-[580px] relative' : 'w-full relative'
-              }`}>
+              <div 
+                className={`w-full mx-auto transition-all duration-500 z-10 ${
+                  viewportMode === 'mobile' ? 'max-w-[360px] border-8 border-slate-800 rounded-[32px] overflow-y-auto bg-slate-900 shadow-2xl h-[580px] relative' : 'w-full relative'
+                }`}
+                style={{ transform: 'translate3d(0, 0, 0)' }}
+              >
                 {/* Embedded Navbar Instance */}
                 {selectedNavbar === 'minimalist' && (
                   <MinimalistNavbar 
