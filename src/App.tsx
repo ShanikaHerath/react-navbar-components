@@ -16,11 +16,15 @@ import {
 import { MinimalistNavbar } from './components/MinimalistNavbar';
 import { GlassmorphismNavbar } from './components/GlassmorphismNavbar';
 import { DarkModePremiumNavbar } from './components/DarkModePremiumNavbar';
+import { NeonCyberpunkNavbar } from './components/NeonCyberpunkNavbar';
+import { AuroraNavbar } from './components/AuroraNavbar';
+import { RetroNavbar } from './components/RetroNavbar';
+import { BrutalistNavbar } from './components/BrutalistNavbar';
 import type { NavLink, NavCTA } from './types/navbar';
 
 export default function App() {
   // Navigation Bar Selection
-  const [selectedNavbar, setSelectedNavbar] = useState<'minimalist' | 'glass' | 'dark'>('glass');
+  const [selectedNavbar, setSelectedNavbar] = useState<'minimalist' | 'glass' | 'dark' | 'neon' | 'aurora' | 'retro' | 'brutalist'>('glass');
   
   // Customization States (Props Editor)
   const [logoText, setLogoText] = useState('AETHER');
@@ -512,6 +516,58 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
     </nav>
   );
 };`;
+      case 'neon':
+        return `// src/components/NeonCyberpunkNavbar.tsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ChevronDown, Cpu } from 'lucide-react';
+import { NavbarProps } from '../types/navbar';
+
+export const NeonCyberpunkNavbar: React.FC<NavbarProps> = ({ logo, logoHref = '#', links, cta, className = '', onCtaClick }) => {
+  // Dark cyberpunk navbar with neon cyan glow, scanline overlay,
+  // and a hot-pink/fuchsia badge accent. Dropdowns use sharp corners
+  // and a subtle cyan border glow on hover.
+  // ...
+};`;
+      case 'aurora':
+        return `// src/components/AuroraNavbar.tsx
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ChevronDown, Star } from 'lucide-react';
+import { NavbarProps } from '../types/navbar';
+
+export const AuroraNavbar: React.FC<NavbarProps> = ({ logo, logoHref = '#', links, cta, className = '', onCtaClick }) => {
+  // Flowing gradient navbar that transitions between deep purple, blue and
+  // teal. Compresses to a near-opaque dark background when scrolled.
+  // Features an animated aurora shimmer top stripe and glassy dropdowns.
+  // ...
+};`;
+      case 'retro':
+        return `// src/components/RetroNavbar.tsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ChevronDown, BookOpen } from 'lucide-react';
+import { NavbarProps } from '../types/navbar';
+
+export const RetroNavbar: React.FC<NavbarProps> = ({ logo, logoHref = '#', links, cta, className = '', onCtaClick }) => {
+  // Warm cream-toned retro navbar in a serif typeface with earthy brown
+  // accents, double-rule borders, and a hatch-stripe decorative top stripe.
+  // Dropdowns use offset box-shadows for a retro print-era feel.
+  // ...
+};`;
+      case 'brutalist':
+        return `// src/components/BrutalistNavbar.tsx
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ChevronDown, Triangle } from 'lucide-react';
+import { NavbarProps } from '../types/navbar';
+
+export const BrutalistNavbar: React.FC<NavbarProps> = ({ logo, logoHref = '#', links, cta, className = '', onCtaClick }) => {
+  // High-contrast brutalist navbar in vivid yellow (#f5f500) and pure black.
+  // Uses bold Impact/Arial Black typography, thick borders, and offset shadows.
+  // Mobile menu slides down from the top and stacks links with heavy dividers.
+  // ...
+};`;
     }
   };
 
@@ -534,7 +590,7 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
         </h1>
         
         <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mt-6 font-light leading-relaxed">
-          Three responsive, props-driven navigation components designed with TypeScript, Tailwind CSS, and fluid Framer Motion animations.
+          Seven responsive, props-driven navigation components designed with TypeScript, Tailwind CSS, and fluid Framer Motion animations.
         </p>
       </header>
 
@@ -623,36 +679,27 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
           
           {/* Navigation Bar Style Tabs */}
           <div className="flex flex-wrap items-center gap-2 bg-slate-900 p-1.5 rounded-2xl border border-slate-800">
-            <button
-              onClick={() => setSelectedNavbar('minimalist')}
-              className={`flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs font-bold tracking-wider uppercase transition-all ${
-                selectedNavbar === 'minimalist'
-                  ? 'bg-slate-850 text-white border border-slate-700 shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Minimalist
-            </button>
-            <button
-              onClick={() => setSelectedNavbar('glass')}
-              className={`flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs font-bold tracking-wider uppercase transition-all ${
-                selectedNavbar === 'glass'
-                  ? 'bg-slate-850 text-white border border-slate-700 shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Glassmorphism
-            </button>
-            <button
-              onClick={() => setSelectedNavbar('dark')}
-              className={`flex-1 min-w-[120px] py-3 px-4 rounded-xl text-xs font-bold tracking-wider uppercase transition-all ${
-                selectedNavbar === 'dark'
-                  ? 'bg-slate-850 text-white border border-slate-700 shadow-md'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Dark Premium
-            </button>
+            {([
+              { key: 'minimalist', label: 'Minimalist' },
+              { key: 'glass',      label: 'Glassmorphism' },
+              { key: 'dark',       label: 'Dark Premium' },
+              { key: 'neon',       label: 'Neon Cyberpunk' },
+              { key: 'aurora',     label: 'Aurora' },
+              { key: 'retro',      label: 'Retro' },
+              { key: 'brutalist',  label: 'Brutalist' },
+            ] as const).map(({ key, label }) => (
+              <button
+                key={key}
+                onClick={() => setSelectedNavbar(key)}
+                className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-[10px] font-bold tracking-wider uppercase transition-all ${
+                  selectedNavbar === key
+                    ? 'bg-slate-850 text-white border border-slate-700 shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
           </div>
 
           {/* Interactive Preview Canvas */}
@@ -677,7 +724,6 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
               {/* Conditional background highlighting styling details */}
               {selectedNavbar === 'glass' && (
                 <div className="absolute inset-0 bg-slate-950 flex items-center justify-center pointer-events-none">
-                  {/* Neon Grid & Gradients so Glassmorphic blur is visible */}
                   <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-64 h-64 rounded-full bg-indigo-600/35 blur-3xl" />
                   <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-pink-500/25 blur-3xl" />
                 </div>
@@ -687,6 +733,24 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
               )}
               {selectedNavbar === 'dark' && (
                 <div className="absolute inset-0 bg-zinc-950 pointer-events-none transition-colors duration-300" />
+              )}
+              {selectedNavbar === 'neon' && (
+                <div className="absolute inset-0 bg-black pointer-events-none">
+                  <div className="absolute top-1/3 left-1/4 w-72 h-72 rounded-full bg-cyan-500/10 blur-3xl" />
+                  <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-fuchsia-500/10 blur-3xl" />
+                </div>
+              )}
+              {selectedNavbar === 'aurora' && (
+                <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, #0a061e 0%, #0f1730 50%, #06161f 100%)' }}>
+                  <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full opacity-25 blur-3xl" style={{ background: '#6337cb' }} />
+                  <div className="absolute bottom-1/3 right-1/4 w-64 h-64 rounded-full opacity-20 blur-3xl" style={{ background: '#0ea5e9' }} />
+                </div>
+              )}
+              {selectedNavbar === 'retro' && (
+                <div className="absolute inset-0 pointer-events-none" style={{ background: '#f3ede0' }} />
+              )}
+              {selectedNavbar === 'brutalist' && (
+                <div className="absolute inset-0 pointer-events-none bg-white" />
               )}
 
               {/* Viewport Frame Box Wrapper */}
@@ -698,14 +762,10 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
               >
                 {/* Embedded Navbar Instance */}
                 {selectedNavbar === 'minimalist' && (
-                  <MinimalistNavbar 
-                    logo={logoText}
-                    links={sampleLinks}
-                    cta={sampleCTA}
-                  />
+                  <MinimalistNavbar logo={logoText} links={sampleLinks} cta={sampleCTA} />
                 )}
                 {selectedNavbar === 'glass' && (
-                  <GlassmorphismNavbar 
+                  <GlassmorphismNavbar
                     logo={logoText}
                     links={sampleLinks}
                     cta={sampleCTA}
@@ -713,50 +773,91 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
                   />
                 )}
                 {selectedNavbar === 'dark' && (
-                  <DarkModePremiumNavbar 
-                    logo={logoText}
-                    links={sampleLinks}
-                    cta={sampleCTA}
-                  />
+                  <DarkModePremiumNavbar logo={logoText} links={sampleLinks} cta={sampleCTA} />
+                )}
+                {selectedNavbar === 'neon' && (
+                  <NeonCyberpunkNavbar logo={logoText} links={sampleLinks} cta={sampleCTA} />
+                )}
+                {selectedNavbar === 'aurora' && (
+                  <AuroraNavbar logo={logoText} links={sampleLinks} cta={sampleCTA} />
+                )}
+                {selectedNavbar === 'retro' && (
+                  <RetroNavbar logo={logoText} links={sampleLinks} cta={sampleCTA} />
+                )}
+                {selectedNavbar === 'brutalist' && (
+                  <BrutalistNavbar logo={logoText} links={sampleLinks} cta={sampleCTA} />
                 )}
 
                 {/* Simulated Webpage Contents */}
-                <div className={`p-8 mt-12 flex flex-col justify-center text-center ${
-                  selectedNavbar === 'minimalist' ? 'text-slate-800' : 'text-slate-300'
-                }`}>
-                  <h3 className={`text-2xl font-black ${
-                    selectedNavbar === 'minimalist' ? 'text-slate-900' : 'text-white'
-                  }`}>
-                    Interactive Mock Page
-                  </h3>
-                  <p className="text-xs max-w-sm mx-auto mt-3 font-light leading-relaxed">
-                    Test the transitions, nested submenus, responsive hamburger toggles, and sliding indicator overlays.
-                  </p>
-                  
-                  {/* Grid Cards to demonstrate site flow */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-                    {[
-                      { title: 'Subtle Micro-Animations', desc: 'Hover tabs use Framer Motion layout transition models.' },
-                      { title: 'Responsive Hamburger', desc: 'Auto scales and overlays clean overlay panels for mobile viewports.' },
-                    ].map((card, i) => (
-                      <div 
-                        key={i} 
-                        className={`p-4 rounded-xl text-left border ${
-                          selectedNavbar === 'minimalist'
-                            ? 'bg-white border-slate-200/60 shadow-sm'
-                            : selectedNavbar === 'glass'
-                            ? 'glassmorphism border-white/10'
-                            : 'bg-zinc-900/60 border-zinc-800'
-                        }`}
+                {(() => {
+                  const isLight = selectedNavbar === 'minimalist' || selectedNavbar === 'retro' || selectedNavbar === 'brutalist';
+                  const isRetro = selectedNavbar === 'retro';
+                  const isBrutalist = selectedNavbar === 'brutalist';
+                  return (
+                    <div className={`p-8 mt-12 flex flex-col justify-center text-center`}
+                      style={{ color: isLight ? (isRetro ? '#5c3d23' : (isBrutalist ? '#000' : '#1e293b')) : '#cbd5e1' }}
+                    >
+                      <h3
+                        className="text-2xl font-black"
+                        style={{
+                          color: isRetro ? '#3d2b1f' : isBrutalist ? '#000' : isLight ? '#0f172a' : '#fff',
+                          fontFamily: isRetro ? "'Georgia', serif" : isBrutalist ? "'Arial Black', Impact, sans-serif" : undefined,
+                        }}
                       >
-                        <h4 className={`text-xs font-bold ${
-                          selectedNavbar === 'minimalist' ? 'text-slate-900' : 'text-white'
-                        }`}>{card.title}</h4>
-                        <p className="text-[10px] text-slate-400 mt-1 leading-normal">{card.desc}</p>
+                        Interactive Mock Page
+                      </h3>
+                      <p className="text-xs max-w-sm mx-auto mt-3 font-light leading-relaxed">
+                        Test the transitions, nested submenus, responsive hamburger toggles, and sliding indicator overlays.
+                      </p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                        {[
+                          { title: 'Subtle Micro-Animations', desc: 'Hover tabs use Framer Motion layout transition models.' },
+                          { title: 'Responsive Hamburger', desc: 'Auto scales and overlays clean overlay panels for mobile viewports.' },
+                        ].map((card, i) => {
+                          let cardStyle: React.CSSProperties = {};
+                          let cardClass = 'p-4 rounded-xl text-left border';
+                          if (selectedNavbar === 'minimalist') cardClass += ' bg-white border-slate-200/60 shadow-sm';
+                          else if (selectedNavbar === 'glass') cardClass += ' glassmorphism border-white/10';
+                          else if (selectedNavbar === 'retro') {
+                            cardClass += ' text-left';
+                            cardStyle = { background: '#faf7f0', border: '2px solid #8b7355', boxShadow: '3px 3px 0 #8b7355' };
+                          } else if (selectedNavbar === 'brutalist') {
+                            cardClass += ' text-left';
+                            cardStyle = { background: '#f5f500', border: '3px solid #000', boxShadow: '4px 4px 0 #000' };
+                          } else if (selectedNavbar === 'neon') {
+                            cardClass += ' text-left';
+                            cardStyle = { background: 'rgba(0,255,255,0.03)', border: '1px solid rgba(0,255,255,0.2)', boxShadow: '0 0 16px rgba(0,255,255,0.06)' };
+                          } else if (selectedNavbar === 'aurora') {
+                            cardClass += ' text-left';
+                            cardStyle = { background: 'rgba(99,55,203,0.25)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' };
+                          } else {
+                            cardClass += ' bg-zinc-900/60 border-zinc-800';
+                          }
+                          return (
+                            <div key={i} className={cardClass} style={cardStyle}>
+                              <h4
+                                className="text-xs font-bold"
+                                style={{
+                                  color: isRetro ? '#3d2b1f' : isBrutalist ? '#000' : isLight ? '#0f172a' : '#fff',
+                                  fontFamily: isRetro ? "'Georgia', serif" : isBrutalist ? "'Arial Black', sans-serif" : undefined,
+                                }}
+                              >
+                                {card.title}
+                              </h4>
+                              <p
+                                className="text-[10px] mt-1 leading-normal"
+                                style={{ color: isRetro ? '#8b7355' : isBrutalist ? '#333' : '#94a3b8' }}
+                              >
+                                {card.desc}
+                              </p>
+                            </div>
+                          );
+                        })}
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                  );
+                })()}
 
               </div>
             </div>
@@ -809,6 +910,10 @@ export const DarkModePremiumNavbar: React.FC<NavbarProps> = ({
                     {selectedNavbar === 'minimalist' && 'MinimalistNavbar.tsx'}
                     {selectedNavbar === 'glass' && 'GlassmorphismNavbar.tsx'}
                     {selectedNavbar === 'dark' && 'DarkModePremiumNavbar.tsx'}
+                    {selectedNavbar === 'neon' && 'NeonCyberpunkNavbar.tsx'}
+                    {selectedNavbar === 'aurora' && 'AuroraNavbar.tsx'}
+                    {selectedNavbar === 'retro' && 'RetroNavbar.tsx'}
+                    {selectedNavbar === 'brutalist' && 'BrutalistNavbar.tsx'}
                   </span>
                   <button 
                     onClick={() => copyToClipboard(getActiveCode(), 'component')}
