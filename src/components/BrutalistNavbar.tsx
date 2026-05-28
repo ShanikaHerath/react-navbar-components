@@ -100,12 +100,12 @@ export const BrutalistNavbar: React.FC<NavbarProps> = ({
                         className="absolute left-0 mt-0 w-64 z-50 bg-[#f5f500]"
                         style={{ border: '3px solid #000', boxShadow: '5px 5px 0 #000' }}
                       >
-                        {link.dropdownItems?.map((subLink) => (
+                        {link.dropdownItems?.map((subLink, subIdx) => (
                           <a
                             key={subLink.label}
                             href={subLink.href}
                             className="flex items-start gap-3 px-4 py-3 transition-colors duration-100 group"
-                            style={{ borderBottom: i < (link.dropdownItems?.length ?? 0) - 1 ? '2px solid #000' : 'none' }}
+                            style={{ borderBottom: subIdx < (link.dropdownItems?.length ?? 0) - 1 ? '2px solid #000' : 'none' }}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.background = '#000';
                               e.currentTarget.querySelectorAll('p').forEach((p) => {
